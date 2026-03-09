@@ -34,8 +34,15 @@ export default function LoginPage() {
             });
 
             if (!response.ok) {
-                const error = await response.json();
-                toast.error(error.error || "Login failed");
+                const contentType = response.headers.get("content-type") || "";
+
+                if (contentType.includes("application/json")) {
+                    const error = await response.json();
+                    toast.error(error.error || "Login failed");
+                } else {
+                    toast.error(`Login failed (${response.status})`);
+                }
+
                 return;
             }
 

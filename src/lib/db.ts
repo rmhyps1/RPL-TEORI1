@@ -3,8 +3,10 @@ import Database from "better-sqlite3";
 import * as schema from "./schema";
 import path from "path";
 
-// Create database file in project root
-const dbPath = path.join(process.cwd(), "app.db");
+const isVercel = process.env.VERCEL === "1" || process.env.VERCEL === "true";
+
+// Vercel filesystem is read-only except /tmp.
+const dbPath = isVercel ? "/tmp/app.db" : path.join(process.cwd(), "app.db");
 const sqlite = new Database(dbPath);
 
 // Enable foreign keys

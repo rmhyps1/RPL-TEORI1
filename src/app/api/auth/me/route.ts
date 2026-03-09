@@ -4,6 +4,8 @@ import { users } from "@/lib/schema";
 import { eq } from "drizzle-orm";
 import { cookies } from "next/headers";
 
+export const runtime = "nodejs";
+
 export async function GET(request: NextRequest) {
   try {
     const cookieStore = await cookies();

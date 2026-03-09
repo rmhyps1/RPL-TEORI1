@@ -5,6 +5,8 @@ import { verifyPassword } from "@/lib/auth";
 import { eq } from "drizzle-orm";
 import { cookies } from "next/headers";
 
+export const runtime = "nodejs";
+
 export async function POST(request: NextRequest) {
   try {
     const { email, password } = await request.json();

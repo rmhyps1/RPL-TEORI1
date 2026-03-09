@@ -35,8 +35,15 @@ export default function RegisterPage() {
             });
 
             if (!response.ok) {
-                const error = await response.json();
-                toast.error(error.error || "Registration failed");
+                const contentType = response.headers.get("content-type") || "";
+
+                if (contentType.includes("application/json")) {
+                    const error = await response.json();
+                    toast.error(error.error || "Registration failed");
+                } else {
+                    toast.error(`Registration failed (${response.status})`);
+                }
+
                 return;
             }
 

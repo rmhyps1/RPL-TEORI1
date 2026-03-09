@@ -4,6 +4,8 @@ import { users } from "@/lib/schema";
 import { hashPassword, generateId } from "@/lib/auth";
 import { eq } from "drizzle-orm";
 
+export const runtime = "nodejs";
+
 export async function POST(request: NextRequest) {
   try {
     const { email, password, name } = await request.json();
